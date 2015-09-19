@@ -102,7 +102,7 @@ public class MainMenu extends MainActivity{
         for (int j = 1; j < dataarray.length; j++) {
             if (dataarray[j] > largest) {
                 largest = dataarray[j];
-                //System.out.println("here " + largest);
+                System.out.println("here " + largest);
             }
             //System.out.println("here " + largest);
         }
