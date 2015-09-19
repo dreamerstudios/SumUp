@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main_menu"
+    android:gravity="top|center"
+    android:background="@drawable/bkg_addo"
+    android:weightSum="1">
+
+    <View android:id="@+id/strut"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_below="@+id/spaces"
+        android:layout_weight="0.1"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="ADDO 81"
+        android:id="@+id/title"
+        android:layout_gravity="center_horizontal"
+        android:fontFamily="times new roman"
+        android:textStyle="bold"
+        android:textSize="40dp"
+        android:layout_below="@+id/strut"
+        android:layout_weight="0.15"
+        />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="PLAY"
+        android:id="@+id/play"
+        android:checked="true"
+        android:clickable="true"
+        android:enabled="true"
+        android:textSize="25dp"
+        android:layout_below="@+id/title"
+        android:layout_weight="0.15"
+
+        android:buttonTint="#010001"/>
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="INSTRUCTIONS"
+        android:id="@+id/instructions"
+        android:checked="true"
+        android:clickable="true"
+        android:enabled="true"
+        android:textSize="25dp"
+        android:layout_below="@+id/play"
+        android:layout_weight="0.15"
+        android:buttonTint="#010001"/>
+    <View android:id="@+id/strut2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_below="@+id/spaces"
+        android:layout_weight="0.035"
+        />
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="Hi-Score"
+        android:id="@+id/radioButton"
+        android:checked="true"
+        android:clickable="true"
+        android:enabled="true"
+        android:textSize="25dp"
+        android:layout_below="@+id/strut2"
+        android:layout_weight="0.07"
+        android:buttonTint="#010001"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_below="@+id/radioButton"
+        android:layout_weight="0.06"
+        android:id="@+id/highscore"
+        android:layout_gravity="center_horizontal" />
+
+
+    <com.facebook.share.widget.ShareButton
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:id="@+id/fb_share_button"
+
+        android:layout_below="@+id/highscore"
+        android:layout_weight="0.05"
+        android:layout_gravity="center_horizontal"
+
+        android:background="@color/com_facebook_button_background_color" />
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        ads:adSize="BANNER"
+        android:layout_below="@+id/fb_share_button"
+        android:layout_weight="0.15"
+        ads:adUnitId="ca-app-pub-8287122308453023/1090955799"
+        android:layout_marginTop="35dp">
+    </com.google.android.gms.ads.AdView>
+
+
+
+</LinearLayout>
