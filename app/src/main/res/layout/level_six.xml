@@ -6,7 +6,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
-    android:id="@+id/Relative1"
+    android:id="@+id/Relative3"
     android:weightSum="1"
     android:orientation="vertical"
     android:gravity="center">
@@ -15,19 +15,20 @@
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="LEVEL: 5 x 5"
-        android:id="@+id/LevelFive"
+        android:text="LEVEL: 6 x 6"
+        android:id="@+id/LevelSix"
         android:gravity="center"
+
         android:layout_weight="0.05"
         />
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:id="@+id/TableLayout01"
+        android:id="@+id/LevelTableLayout01"
         android:clickable="true"
         android:orientation="vertical"
         android:layout_weight="0.70"
-        android:layout_below="@+id/LevelFive"
+
         android:gravity="center">
         <!--android:layout_marginBottom="160dp"-->
 
@@ -41,7 +42,7 @@
         </TableRow>
     </TableLayout>
 
-    <View android:id="@+id/strut1"
+    <View android:id="@+id/Levelstrut1"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_below="@+id/spaces"
@@ -53,53 +54,53 @@
         android:layout_height="0dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
-        android:id="@+id/Timer"
+        android:id="@+id/LevelTimer"
         android:gravity="center"
-        android:layout_below="@+id/strut1"
+        android:layout_below="@+id/Levelstrut1"
 
         android:layout_weight="0.07"
         />
     <!--aandroid:layout_marginBottom="114dp"-->
 
-<TextView
-    android:layout_width="fill_parent"
-    android:layout_height="0dp"
-    android:textAppearance="?android:attr/textAppearanceLarge"
-    android:text="Large Text"
-    android:id="@+id/spaces"
-    android:layout_below="@+id/Timer"
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/Levelspaces"
+        android:layout_below="@+id/LevelTimer"
 
-    android:gravity="center"
-    android:layout_weight="0.07"
-    />
-<!--android:layout_marginTop="38dp"-->
+        android:gravity="center"
+        android:layout_weight="0.07"
+        />
+    <!--android:layout_marginTop="38dp"-->
 
-    <View android:id="@+id/strut"
+    <View android:id="@+id/Levelstrut"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_below="@+id/spaces"
+        android:layout_below="@+id/Levelspaces"
         android:layout_weight="0.04"
-       />
-<TableLayout
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:gravity="center"
-    android:id="@+id/TableLayout2"
-    android:orientation="vertical"
-    android:layout_below="@+id/strut"
-    android:layout_weight="0.08"
-    >
-<!--android:layout_marginTop="429dp"-->
-
-
-    <TableRow
-        android:gravity="center"
+        />
+    <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/TableRow2"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:id="@+id/LevelTableLayout2"
+        android:orientation="vertical"
+        android:layout_below="@+id/Levelstrut"
+        android:layout_weight="0.08"
+        >
+        <!--android:layout_marginTop="429dp"-->
 
-        ></TableRow>
-</TableLayout>
+
+        <TableRow
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/LevelTableRow2"
+
+            ></TableRow>
+    </TableLayout>
 
 
 

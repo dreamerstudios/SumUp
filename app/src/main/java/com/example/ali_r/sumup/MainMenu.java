@@ -64,6 +64,7 @@ public class MainMenu extends MainActivity{
         setContentView(R.layout.main_menu);
 
         final RadioButton x1 = (RadioButton) findViewById(R.id.play);
+
         //buttonEffect(x1);
         x1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -79,8 +80,13 @@ public class MainMenu extends MainActivity{
                 startActivity(new Intent(MainMenu.this, InstructionOne.class));
             }
         });
+        final RadioButton x3 = (RadioButton) findViewById(R.id.Levels);
+        x3.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
 
-
+                startActivity(new Intent(MainMenu.this, LevelsActivity.class));
+            }
+        });
         List<Contact> contacts = db.getAllContacts();
         int[] dataarray = new int[contacts.size() + 1];
         int i = 0;
@@ -102,7 +108,7 @@ public class MainMenu extends MainActivity{
         for (int j = 1; j < dataarray.length; j++) {
             if (dataarray[j] > largest) {
                 largest = dataarray[j];
-                System.out.println("here " + largest);
+                //System.out.println("here " + largest);
             }
             //System.out.println("here " + largest);
         }

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="LEVEL 5 X 5"
+        android:id="@+id/level_five"
+        android:checked="true"
+        android:clickable="true"
+        android:enabled="true"
+        android:textSize="25dp"
+
+        android:layout_weight="0.02"
+        android:buttonTint="#010001"
+        android:layout_gravity="center_horizontal" />
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="LEVEL 6 X 6"
+        android:id="@+id/level_six"
+        android:checked="true"
+        android:clickable="true"
+        android:enabled="true"
+        android:textSize="25dp"
+        android:layout_below="@+id/level_five"
+        android:layout_weight="0.02"
+        android:buttonTint="#010001"
+        android:layout_gravity="center_horizontal" />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="LEVEL 7 X 7"
+        android:id="@+id/level_seven"
+        android:checked="true"
+        android:clickable="true"
+        android:enabled="true"
+        android:textSize="25dp"
+        android:layout_below="@+id/level_six"
+        android:layout_weight="0.02"
+        android:buttonTint="#010001"
+        android:layout_gravity="center_horizontal" />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="LEVEL 8 X 8"
+        android:id="@+id/level_eight"
+        android:checked="true"
+        android:clickable="true"
+        android:enabled="true"
+        android:textSize="25dp"
+        android:layout_below="@+id/level_eight"
+        android:layout_weight="0.02"
+        android:buttonTint="#010001"
+        android:layout_gravity="center_horizontal" />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="LEVEL 9 X 9"
+        android:id="@+id/level_nine"
+        android:checked="true"
+        android:clickable="true"
+
+        android:enabled="true"
+        android:textSize="25dp"
+        android:layout_below="@+id/level_nine"
+        android:layout_weight="0.02"
+        android:buttonTint="#010001"
+        android:layout_gravity="center_horizontal" />
+
+</LinearLayout>

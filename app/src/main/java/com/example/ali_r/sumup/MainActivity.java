@@ -8,7 +8,9 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Notification;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
@@ -68,10 +70,26 @@ public class MainActivity extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        length=5;
+    length=5;
+
+//System.out.println(db.getlevelsCount());
 
 
+/*if(db.getlevelsCount()>0) {
+    List<Contact> levels = db.getAllLevels();
+    for (Contact cn : levels) {
+        if (cn.getPhoneNumber().equals("6")) {
+            length = 6;
 
+            break;
+        }
+
+    }
+
+}
+        else {
+    length = 5;
+}*/
         newarray = new int[20][20];
         textarray = new TextView[length][length];
         textarray2 = new TextView[9];
@@ -86,10 +104,6 @@ public class MainActivity extends AppCompatActivity{
         Row2 = (TableRow) findViewById(R.id.TableRow2);
         display = getWindowManager().getDefaultDisplay();
         final TextView asu = (TextView) findViewById(R.id.spaces);
-        asu.setText(Html.fromHtml("<font color='gray'>SPACES: </font><b>30</b><font color='gray'>/81</font>"));
-
-
-
 
 
             for (int r = 0; r < length; r++) {
@@ -103,8 +117,8 @@ public class MainActivity extends AppCompatActivity{
 
                     row.addView(textarray[r][c]);
 
-                    int width = ((display.getWidth() * 8) / 100);
-                    int height = ((display.getWidth() * 8) / 100);
+                    int width = ((display.getWidth() * 14) / 100);
+                    int height = ((display.getWidth() * 14) / 100);
 
 
                     TableRow.LayoutParams params =
@@ -125,6 +139,7 @@ public class MainActivity extends AppCompatActivity{
 
 
             generateScarmbGrid(length, length, (int)(length*length*0.38)); //create grid - 30 is the number of spaces in the grid
+        asu.setText(Html.fromHtml("<font color='gray'>SPACES: </font><b>" + GetSpaces() + "</b><font color='gray'>/81</font>"));
             createQueue();// create Queue
 
 
@@ -161,13 +176,17 @@ public class MainActivity extends AppCompatActivity{
                 @Override
                 public void onFinish() {
                     if (GetSpaces() == (length*length)) {
-                        asj.setText(Html.fromHtml("<font color='green'>YOU BEAT THE GAME!!! </font>"));
+                        asj.setText(Html.fromHtml("<font color='green'>YOU BEAT THE LEVEL!!! </font>"));
                         db.addContact(new Contact("yes", String.valueOf(GetSpaces())));
 
-                        cancel();
-                        finish();
+                        this.cancel();
+                        startActivity(new Intent(MainActivity.this, LevelSix.class));
                         //levelcheck=true;
-                        startActivity(getIntent());
+
+                        //db.addLevel(new Contact("Level", "6"));
+
+                        //-startActivity(new Intent(MainActivity.this, LevelSix.class));
+                        finish();
                     }
 
                     else {
@@ -176,7 +195,9 @@ public class MainActivity extends AppCompatActivity{
                         //System.out.println("onFinishBitch");
                         setX();
                     }
+
                 }
+
             }.start();
 
         for (rows = 0; rows < length; rows++) {
@@ -340,8 +361,8 @@ public class MainActivity extends AppCompatActivity{
             textarray2[k].setBackgroundColor(Color.WHITE);
             Row2.addView(textarray2[k]);
 
-            int width1 = ((display.getWidth() * 8) / 100);
-            int height1 = ((display.getWidth() * 8) / 100);
+            int width1 = ((display.getWidth() * 9) / 100);
+            int height1 = ((display.getWidth() * 9) / 100);
 
             TableRow.LayoutParams params =
                     (TableRow.LayoutParams) t1.getLayoutParams();

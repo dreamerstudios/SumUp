@@ -38,7 +38,7 @@
         android:enabled="true"
         android:textSize="25dp"
         android:layout_below="@+id/title"
-        android:layout_weight="0.15"
+        android:layout_weight="0.12"
 
         android:buttonTint="#010001"/>
 
@@ -52,14 +52,26 @@
         android:enabled="true"
         android:textSize="25dp"
         android:layout_below="@+id/play"
-        android:layout_weight="0.15"
+        android:layout_weight="0.12"
         android:buttonTint="#010001"/>
-    <View android:id="@+id/strut2"
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="LEVELS"
+        android:id="@+id/Levels"
+        android:checked="true"
+        android:clickable="true"
+        android:enabled="true"
+        android:textSize="25dp"
+        android:layout_below="@+id/play"
+        android:layout_weight="0.12"
+        android:buttonTint="#010001"/>
+    <View android:id="@+id/strut6"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_below="@+id/spaces"
-        android:layout_weight="0.035"
-        />
+        android:layout_weight="0.02"/>
     <RadioButton
         android:layout_width="wrap_content"
         android:layout_height="0dp"
@@ -69,8 +81,8 @@
         android:clickable="true"
         android:enabled="true"
         android:textSize="25dp"
-        android:layout_below="@+id/strut2"
-        android:layout_weight="0.07"
+        android:layout_below="@+id/strut6"
+        android:layout_weight="0.08"
         android:buttonTint="#010001"
         android:layout_gravity="center_horizontal" />
 
