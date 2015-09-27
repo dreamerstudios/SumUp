@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.view.Display;
@@ -70,6 +71,14 @@ public class LevelEight extends AppCompatActivity {
         display = getWindowManager().getDefaultDisplay();
         final TextView asu = (TextView) findViewById(R.id.LevelEightspaces);
 
+        db.getWritableDatabase();
+        Contact newa4 = new Contact();
+        newa4 = db.getContact(2);
+        if(Integer.parseInt(newa4._phone_number) < 8) {
+            newa4._phone_number = "8";
+            db.updateContact(newa4);
+        }
+        db.close();
 
         for (int r = 0; r < length; r++) {
             row = new TableRow(this);
@@ -104,7 +113,16 @@ public class LevelEight extends AppCompatActivity {
 
 
         generateScarmbGrid(length, length, (int)(length*length*0.38)); //create grid - 30 is the number of spaces in the grid
-        asu.setText(Html.fromHtml("<font color='gray'>SPACES: </font><b>" + GetSpaces() + "</b><font color='gray'>/81</font>"));
+        asu.setText(Html.fromHtml("<font color='gray'>SCORE: </font><b>" +(GetSpaces()+110)+ "</b><font color='gray'>/255</font>"));
+
+        db.getWritableDatabase();
+        Contact newa2 = new Contact();
+        newa2 = db.getContact(1);
+
+        newa2._phone_number=String.valueOf((GetSpaces()+110));
+        db.updateContact(newa2);
+
+        db.close();
         createQueue();// create Queue
 
 
@@ -126,7 +144,9 @@ public class LevelEight extends AppCompatActivity {
                     onFinish();
 
                 }
-
+                else if(GetSpaces()==0){
+                    onFinish();
+                }
                 else {
                     asj.setText(Html.fromHtml("<font color='gray'>TIME: </font><b>" + millisUntilFinished / 1000 + "</b>"));
                     asj.setGravity(Gravity.CENTER);
@@ -142,20 +162,40 @@ public class LevelEight extends AppCompatActivity {
             @Override
             public void onFinish() {
                 if (GetSpaces() == (length*length)) {
-                    asj.setText(Html.fromHtml("<font color='green'>YOU BEAT THE LEVEL!!! </font>"));
-                    db.addContact(new Contact("yes", String.valueOf(GetSpaces())));
+                    asj.setText(Html.fromHtml("<font color='green'>LEVEL 9 X 9 UNLOCKED!</font>"));
+
+                    //db.addContact(new Contact("yes", String.valueOf(GetSpaces())));
 
                     this.cancel();
-                    startActivity(new Intent(LevelEight.this, LevelNine.class));
+                    new CountDownTimer(2000, 1000) {
+
+                        public void onTick(long millisUntilFinished) {
+
+                        }
+
+                        public void onFinish() {
+                            startActivity(new Intent(LevelEight.this, LevelNine.class));
+                            //levelcheck=true;
+
+                            //db.addLevel(new Contact("Level", "6"));
+
+                            //-startActivity(new Intent(MainActivity.this, LevelSix.class));
+                            finish();
+                        }
+                    }.start();
+                    //startActivity(new Intent(MainActivity.this, LevelSix.class));
                     //levelcheck=true;
 
                     //db.addLevel(new Contact("Level", "6"));
 
                     //-startActivity(new Intent(MainActivity.this, LevelSix.class));
-                    finish();
+                    //finish();
 
                 }
-
+                else if(GetSpaces()==0){
+                    asj.setText(Html.fromHtml("<font color='red'>NO MORE MOVES LEFT </font>"));
+                    this.cancel();
+                }
                 else {
                     asj.setText(Html.fromHtml("<font color='red'>TIME IS UP!!!!</font>"));
                     hello = false;
@@ -215,7 +255,16 @@ public class LevelEight extends AppCompatActivity {
                                 totalsummation=false;
 
                             }
-                            asu.setText(Html.fromHtml("<font color='gray'>SPACES: </font><b>" + GetSpaces() + "</b><font color='gray'>/81</font>"));
+                            db.getWritableDatabase();
+                            Contact newa1 = new Contact();
+                            newa1 = db.getContact(1);
+                            if((GetSpaces()+110)>Integer.parseInt(newa1._phone_number)){
+                                newa1._phone_number=String.valueOf((GetSpaces()+110));
+                                db.updateContact(newa1);
+                                //System.out.println(newa1._phone_number.toString());
+                                db.close();
+                                ActivityCompat.invalidateOptionsMenu(LevelEight.this);}
+                            asu.setText(Html.fromHtml("<font color='gray'>SCORE: </font><b>" +(GetSpaces()+110)+ "</b><font color='gray'>/255</font>"));
                         }
 
                     }
@@ -238,7 +287,7 @@ public class LevelEight extends AppCompatActivity {
         //return true;
         // TextView x19 = (TextView) findViewById(R.id.highscore);
         TextView tv = new TextView(this);
-        int larger;
+        /*int larger;
         List<Contact> contacts = db.getAllContacts();
         int[] dataarray = new int[contacts.size() + 1];
         int i = 0;
@@ -258,9 +307,11 @@ public class LevelEight extends AppCompatActivity {
                 //System.out.println("here " + largest);
             }
             //System.out.println("here " + largest);
-        }
+        }*/
 
-        tv.setText(Html.fromHtml("<font color='gray'>HISCORE: </font><b>" + larger + "</b><font color='gray'>/81</font>"));
+        db.getWritableDatabase();
+
+        tv.setText(Html.fromHtml("<font color='gray'>HISCORE: </font><b>" + db.getContact(1).getPhoneNumber().toString() + "</b><font color='gray'>/255</font>"));
         tv.setTextColor(Color.WHITE);
         //tv.setOnClickListener(this);
         tv.setPadding(5, 0, 5, 0);
@@ -269,10 +320,11 @@ public class LevelEight extends AppCompatActivity {
         // MenuItem menuItem = menu.findItem(R.id.menu_main);
         //menuItem.setTitle("ADDO 81");
         menu.add(0, R.menu.menu_main, 1, "").setActionView(tv).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-
+        db.close();
         //MenuInflater mif = getMenuInflater();
         //mif.inflate(R.menu.main_actionbar, menu);
         //return super.onCreateOptionsMenu(menu);
+
         return true;
     }
 

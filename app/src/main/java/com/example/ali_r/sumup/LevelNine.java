@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.view.Display;
@@ -71,6 +72,15 @@ public class LevelNine extends AppCompatActivity {
         final TextView asu = (TextView) findViewById(R.id.LevelNinespaces);
 
 
+        db.getWritableDatabase();
+        Contact newa4 = new Contact();
+        newa4 = db.getContact(2);
+        if(Integer.parseInt(newa4._phone_number) < 9) {
+            newa4._phone_number = "9";
+            db.updateContact(newa4);
+        }
+        db.close();
+
         for (int r = 0; r < length; r++) {
             row = new TableRow(this);
             row.setGravity(Gravity.CENTER);
@@ -104,7 +114,16 @@ public class LevelNine extends AppCompatActivity {
 
 
         generateScarmbGrid(length, length, (int)(length*length*0.38)); //create grid - 30 is the number of spaces in the grid
-        asu.setText(Html.fromHtml("<font color='gray'>SPACES: </font><b>" + GetSpaces() + "</b><font color='gray'>/81</font>"));
+        asu.setText(Html.fromHtml("<font color='gray'>SCORE: </font><b>" +(GetSpaces()+174)+ "</b><font color='gray'>/255</font>"));
+
+        db.getWritableDatabase();
+        Contact newa2 = new Contact();
+        newa2 = db.getContact(1);
+
+        newa2._phone_number=String.valueOf((GetSpaces()+174));
+        db.updateContact(newa2);
+
+        db.close();
         createQueue();// create Queue
 
 
@@ -126,7 +145,9 @@ public class LevelNine extends AppCompatActivity {
                     onFinish();
 
                 }
-
+                else if(GetSpaces()==0){
+                    onFinish();
+                }
                 else {
                     asj.setText(Html.fromHtml("<font color='gray'>TIME: </font><b>" + millisUntilFinished / 1000 + "</b>"));
                     asj.setGravity(Gravity.CENTER);
@@ -143,14 +164,17 @@ public class LevelNine extends AppCompatActivity {
             public void onFinish() {
                 if (GetSpaces() == (length*length)) {
                     asj.setText(Html.fromHtml("<font color='green'>YOU BEAT THE GAME!!! </font>"));
-                    db.addContact(new Contact("yes", String.valueOf(GetSpaces())));
+                   // db.addContact(new Contact("yes", String.valueOf(GetSpaces())));
 
                     this.cancel();
 
                     //finish();
 
                 }
-
+                else if(GetSpaces()==0){
+                    asj.setText(Html.fromHtml("<font color='red'>NO MORE MOVES LEFT </font>"));
+                    this.cancel();
+                }
                 else {
                     asj.setText(Html.fromHtml("<font color='red'>TIME IS UP!!!!</font>"));
                     hello = false;
@@ -210,7 +234,16 @@ public class LevelNine extends AppCompatActivity {
                                 totalsummation=false;
 
                             }
-                            asu.setText(Html.fromHtml("<font color='gray'>SPACES: </font><b>" + GetSpaces() + "</b><font color='gray'>/81</font>"));
+                            db.getWritableDatabase();
+                            Contact newa1 = new Contact();
+                            newa1 = db.getContact(1);
+                            if((GetSpaces()+174)>Integer.parseInt(newa1._phone_number)){
+                                newa1._phone_number=String.valueOf((GetSpaces()+174));
+                                db.updateContact(newa1);
+                                //System.out.println(newa1._phone_number.toString());
+                                db.close();
+                                ActivityCompat.invalidateOptionsMenu(LevelNine.this);}
+                            asu.setText(Html.fromHtml("<font color='gray'>SCORE: </font><b>" +(GetSpaces()+174)+ "</b><font color='gray'>/255</font>"));
                         }
 
                     }
@@ -233,7 +266,7 @@ public class LevelNine extends AppCompatActivity {
         //return true;
         // TextView x19 = (TextView) findViewById(R.id.highscore);
         TextView tv = new TextView(this);
-        int larger;
+        /*int larger;
         List<Contact> contacts = db.getAllContacts();
         int[] dataarray = new int[contacts.size() + 1];
         int i = 0;
@@ -253,9 +286,11 @@ public class LevelNine extends AppCompatActivity {
                 //System.out.println("here " + largest);
             }
             //System.out.println("here " + largest);
-        }
+        }*/
 
-        tv.setText(Html.fromHtml("<font color='gray'>HISCORE: </font><b>" + larger + "</b><font color='gray'>/81</font>"));
+        db.getWritableDatabase();
+
+        tv.setText(Html.fromHtml("<font color='gray'>HISCORE: </font><b>" + db.getContact(1).getPhoneNumber().toString() + "</b><font color='gray'>/255</font>"));
         tv.setTextColor(Color.WHITE);
         //tv.setOnClickListener(this);
         tv.setPadding(5, 0, 5, 0);
@@ -264,10 +299,11 @@ public class LevelNine extends AppCompatActivity {
         // MenuItem menuItem = menu.findItem(R.id.menu_main);
         //menuItem.setTitle("ADDO 81");
         menu.add(0, R.menu.menu_main, 1, "").setActionView(tv).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-
+        db.close();
         //MenuInflater mif = getMenuInflater();
         //mif.inflate(R.menu.main_actionbar, menu);
         //return super.onCreateOptionsMenu(menu);
+
         return true;
     }
 

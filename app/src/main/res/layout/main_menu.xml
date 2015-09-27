@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="ADDO 81"
+        android:text="ADD UP"
         android:id="@+id/title"
         android:layout_gravity="center_horizontal"
         android:fontFamily="times new roman"
@@ -111,13 +111,11 @@
         android:id="@+id/adView"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
         ads:adSize="BANNER"
         android:layout_below="@+id/fb_share_button"
+        android:layout_gravity="bottom|center"
         android:layout_weight="0.15"
-        ads:adUnitId="ca-app-pub-8287122308453023/1090955799"
-        android:layout_marginTop="35dp">
+        ads:adUnitId="ca-app-pub-8287122308453023/1090955799">
     </com.google.android.gms.ads.AdView>
 
 

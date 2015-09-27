@@ -87,7 +87,7 @@ public class MainMenu extends MainActivity{
                 startActivity(new Intent(MainMenu.this, LevelsActivity.class));
             }
         });
-        List<Contact> contacts = db.getAllContacts();
+        /*List<Contact> contacts = db.getAllContacts();
         int[] dataarray = new int[contacts.size() + 1];
         int i = 0;
         dataarray[0] = 0;
@@ -112,16 +112,24 @@ public class MainMenu extends MainActivity{
             }
             //System.out.println("here " + largest);
         }
-
+*/
        TextView higherscore = (TextView)findViewById(R.id.highscore);
-        higherscore.setText(largest + "");
+        //higherscore.setText(largest + "");
+        db.getReadableDatabase();
+        Contact newa9 = new Contact();
+        newa9 = db.getContact(1);
+
+        higherscore.setText(newa9._phone_number.toString() + "");
+
+
+
 
         ShareLinkContent content = new ShareLinkContent.Builder()
-                .setContentTitle("I got a hiscore of "+largest+".")
+                .setContentTitle("I got a hiscore of "+newa9._phone_number.toString()+".")
                 .setContentUrl(Uri.parse("https://play.google.com/store/search?q=addo%2081&hl=en"))
-                .setContentDescription("Try ADDO 81 Challenge to beat my score!")
+                .setContentDescription("Try SUM UP Challenge to beat my score!")
                 .build();
-
+        db.close();
         Button hiscore = new Button(this);
         //hiscore = (Button) findViewById(R.id.shareButton);
 

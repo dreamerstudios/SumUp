@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Notification;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
@@ -17,6 +18,7 @@ import android.graphics.Typeface;
 import android.os.CountDownTimer;
 import android.provider.Settings;
 import android.support.annotation.IdRes;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
@@ -40,6 +42,7 @@ import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
+import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity{
@@ -89,7 +92,16 @@ public class MainActivity extends AppCompatActivity{
 }
         else {
     length = 5;
-}*/
+}*/     db.getWritableDatabase();
+
+        if(db.getContactsCount()==0) {
+            db.addContact(new Contact("Hiscore", "0"));
+            db.addContact(new Contact("Level", "5"));
+            //Contact newa6 = new Contact();
+            //newa6 = db.getContact(2);
+            //System.out.println(newa6._phone_number.toString());
+        }
+        db.close();
         newarray = new int[20][20];
         textarray = new TextView[length][length];
         textarray2 = new TextView[9];
@@ -139,7 +151,7 @@ public class MainActivity extends AppCompatActivity{
 
 
             generateScarmbGrid(length, length, (int)(length*length*0.38)); //create grid - 30 is the number of spaces in the grid
-        asu.setText(Html.fromHtml("<font color='gray'>SPACES: </font><b>" + GetSpaces() + "</b><font color='gray'>/81</font>"));
+        asu.setText(Html.fromHtml("<font color='gray'>SCORE: </font><b>" + GetSpaces() + "</b><font color='gray'>/255</font>"));
             createQueue();// create Queue
 
 
@@ -158,9 +170,10 @@ public class MainActivity extends AppCompatActivity{
 
                         if(GetSpaces()==length*length){
                             onFinish();
-
                         }
-
+                        else if(GetSpaces()==0){
+                            onFinish();
+                        }
                         else {
                             asj.setText(Html.fromHtml("<font color='gray'>TIME: </font><b>" + millisUntilFinished / 1000 + "</b>"));
                             asj.setGravity(Gravity.CENTER);
@@ -176,17 +189,39 @@ public class MainActivity extends AppCompatActivity{
                 @Override
                 public void onFinish() {
                     if (GetSpaces() == (length*length)) {
-                        asj.setText(Html.fromHtml("<font color='green'>YOU BEAT THE LEVEL!!! </font>"));
-                        db.addContact(new Contact("yes", String.valueOf(GetSpaces())));
+                        asj.setText(Html.fromHtml("<font color='green'>LEVEL 6 X 6 UNLOCKED!</font>"));
+
+                        //db.addContact(new Contact("yes", String.valueOf(GetSpaces())));
 
                         this.cancel();
-                        startActivity(new Intent(MainActivity.this, LevelSix.class));
+                        new CountDownTimer(2000, 1000) {
+
+                            public void onTick(long millisUntilFinished) {
+
+                            }
+
+                            public void onFinish() {
+                                startActivity(new Intent(MainActivity.this, LevelSix.class));
+                                //levelcheck=true;
+
+                                //db.addLevel(new Contact("Level", "6"));
+
+                                //-startActivity(new Intent(MainActivity.this, LevelSix.class));
+                                finish();
+                            }
+                        }.start();
+                        //startActivity(new Intent(MainActivity.this, LevelSix.class));
                         //levelcheck=true;
 
                         //db.addLevel(new Contact("Level", "6"));
 
                         //-startActivity(new Intent(MainActivity.this, LevelSix.class));
-                        finish();
+                        //finish();
+                    }
+
+                    else if(GetSpaces()==0){
+                        asj.setText(Html.fromHtml("<font color='red'>NO MORE MOVES LEFT </font>"));
+                        this.cancel();
                     }
 
                     else {
@@ -248,7 +283,17 @@ public class MainActivity extends AppCompatActivity{
                                     totalsummation=false;
 
                                 }
-                                asu.setText(Html.fromHtml("<font color='gray'>SPACES: </font><b>" + GetSpaces() + "</b><font color='gray'>/81</font>"));
+
+                                db.getWritableDatabase();
+                                Contact newa1 = new Contact();
+                                newa1 = db.getContact(1);
+                                if(GetSpaces()>Integer.parseInt(newa1._phone_number)){
+                                newa1._phone_number=String.valueOf(GetSpaces());
+                                db.updateContact(newa1);
+                                //System.out.println(newa1._phone_number.toString());
+                                db.close();
+                                ActivityCompat.invalidateOptionsMenu(MainActivity.this);}
+                                asu.setText(Html.fromHtml("<font color='gray'>SCORE: </font><b>" + GetSpaces() + "</b><font color='gray'>/255</font>"));
                             }
 
                         }
@@ -264,6 +309,7 @@ public class MainActivity extends AppCompatActivity{
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
         MainMenu yeabay = new MainMenu();
 
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -271,7 +317,7 @@ public class MainActivity extends AppCompatActivity{
         //return true;
        // TextView x19 = (TextView) findViewById(R.id.highscore);
         TextView tv = new TextView(this);
-        int larger;
+        /*int larger;
         List<Contact> contacts = db.getAllContacts();
         int[] dataarray = new int[contacts.size() + 1];
         int i = 0;
@@ -291,9 +337,11 @@ public class MainActivity extends AppCompatActivity{
                 //System.out.println("here " + largest);
             }
             //System.out.println("here " + largest);
-        }
+        }*/
 
-        tv.setText(Html.fromHtml("<font color='gray'>HISCORE: </font><b>" + larger + "</b><font color='gray'>/81</font>"));
+db.getWritableDatabase();
+
+        tv.setText(Html.fromHtml("<font color='gray'>HISCORE: </font><b>" + db.getContact(1).getPhoneNumber().toString() + "</b><font color='gray'>/255</font>"));
         tv.setTextColor(Color.WHITE);
         //tv.setOnClickListener(this);
         tv.setPadding(5, 0, 5, 0);
@@ -302,12 +350,14 @@ public class MainActivity extends AppCompatActivity{
        // MenuItem menuItem = menu.findItem(R.id.menu_main);
         //menuItem.setTitle("ADDO 81");
         menu.add(0, R.menu.menu_main, 1, "").setActionView(tv).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-
+db.close();
         //MenuInflater mif = getMenuInflater();
         //mif.inflate(R.menu.main_actionbar, menu);
         //return super.onCreateOptionsMenu(menu);
+
         return true;
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -439,7 +489,7 @@ public class MainActivity extends AppCompatActivity{
 
 
         //System.out.println("here"+GetSpaces());
-        db.addContact(new Contact("yes", String.valueOf(GetX())));
+        //db.addContact(new Contact("yes", String.valueOf(GetX())));
     }
 
     public boolean isEmpty(){
@@ -450,6 +500,15 @@ public class MainActivity extends AppCompatActivity{
             return false;
         }
 
+    }
+
+    public boolean isFull(){
+        if(GetSpaces()==0){
+                return true;
+            }
+            else {
+                return false;
+            }
     }
 
     }
