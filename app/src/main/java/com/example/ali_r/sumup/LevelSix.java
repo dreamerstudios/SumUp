@@ -135,10 +135,12 @@ public class LevelSix extends AppCompatActivity {
         Contact newa2 = new Contact();
         newa2 = db.getContact(1);
 
-            newa2._phone_number=String.valueOf((GetSpaces()+25));
-            db.updateContact(newa2);
 
-            db.close();
+        if((GetSpaces()+25)>Integer.parseInt(newa2._phone_number)){
+            newa2._phone_number=String.valueOf((GetSpaces() + 25));
+            db.updateContact(newa2);}
+        db.close();
+
             //ActivityCompat.invalidateOptionsMenu(LevelSix.this);}
         createQueue();// create Queue
 
@@ -475,7 +477,7 @@ public class LevelSix extends AppCompatActivity {
 
 
         //System.out.println("here"+GetSpaces());
-        db.addContact(new Contact("yes", String.valueOf(GetX())));
+
     }
 
     public boolean isEmpty(){

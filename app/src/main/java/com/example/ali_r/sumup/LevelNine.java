@@ -113,16 +113,16 @@ public class LevelNine extends AppCompatActivity {
         }
 
 
-        generateScarmbGrid(length, length, (int)(length*length*0.38)); //create grid - 30 is the number of spaces in the grid
+        generateScarmbGrid(length, length, (int) (length * length * 0.38)); //create grid - 30 is the number of spaces in the grid
         asu.setText(Html.fromHtml("<font color='gray'>SCORE: </font><b>" +(GetSpaces()+174)+ "</b><font color='gray'>/255</font>"));
 
         db.getWritableDatabase();
         Contact newa2 = new Contact();
         newa2 = db.getContact(1);
 
-        newa2._phone_number=String.valueOf((GetSpaces()+174));
-        db.updateContact(newa2);
-
+        if((GetSpaces()+174)>Integer.parseInt(newa2._phone_number)){
+            newa2._phone_number=String.valueOf((GetSpaces() + 174));
+            db.updateContact(newa2);}
         db.close();
         createQueue();// create Queue
 
@@ -437,7 +437,7 @@ public class LevelNine extends AppCompatActivity {
 
 
         //System.out.println("here"+GetSpaces());
-        db.addContact(new Contact("yes", String.valueOf(GetX())));
+
     }
 
     public boolean isEmpty(){
