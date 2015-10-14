@@ -69,7 +69,32 @@ public class MainMenu extends MainActivity{
         x1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                startActivity(new Intent(MainMenu.this, MainActivity.class));
+                db.getWritableDatabase();
+                Contact newa5 = new Contact();
+                newa5 = db.getContact(2);
+
+                if(Integer.parseInt(newa5._phone_number) == 6) {
+                    startActivity(new Intent(MainMenu.this, LevelSix.class));
+                    db.close();
+                }
+                else if(Integer.parseInt(newa5._phone_number) == 7) {
+                    startActivity(new Intent(MainMenu.this, LevelSeven.class));
+                    db.close();
+                }
+
+                else if(Integer.parseInt(newa5._phone_number) == 8) {
+                    startActivity(new Intent(MainMenu.this, LevelEight.class));
+                    db.close();
+                }
+                else if(Integer.parseInt(newa5._phone_number) == 9) {
+                    startActivity(new Intent(MainMenu.this, LevelNine.class));
+                    db.close();
+                }
+                else{
+                    startActivity(new Intent(MainMenu.this, MainActivity.class));
+                    db.close();
+                }
+
             }
         });
         final RadioButton x2 = (RadioButton) findViewById(R.id.instructions);

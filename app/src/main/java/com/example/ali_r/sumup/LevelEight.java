@@ -91,8 +91,8 @@ public class LevelEight extends AppCompatActivity {
 
                 row.addView(textarray[r][c]);
 
-                int width = ((display.getWidth() * 10) / 100);
-                int height = ((display.getWidth() * 10) / 100);
+                int width = ((display.getWidth() * 9) / 100);
+                int height = ((display.getWidth() * 9) / 100);
 
 
                 TableRow.LayoutParams params =
@@ -129,7 +129,7 @@ public class LevelEight extends AppCompatActivity {
         final TextView asj = (TextView) findViewById(R.id.LevelEightTimer);
 
 
-        CountDownTimer countd = new CountDownTimer(400000, 500) {
+        CountDownTimer countd = new CountDownTimer(280000, 500) {
 
 
             boolean hello = true;

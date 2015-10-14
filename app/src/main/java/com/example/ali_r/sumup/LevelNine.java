@@ -92,8 +92,8 @@ public class LevelNine extends AppCompatActivity {
 
                 row.addView(textarray[r][c]);
 
-                int width = ((display.getWidth() * 9) / 100);
-                int height = ((display.getWidth() * 9) / 100);
+                int width = ((display.getWidth() * 8) / 100);
+                int height = ((display.getWidth() * 8) / 100);
 
 
                 TableRow.LayoutParams params =
@@ -130,7 +130,7 @@ public class LevelNine extends AppCompatActivity {
         final TextView asj = (TextView) findViewById(R.id.LevelNineTimer);
 
 
-        CountDownTimer countd = new CountDownTimer(400000, 500) {
+        CountDownTimer countd = new CountDownTimer(300000, 500) {
 
 
             boolean hello = true;

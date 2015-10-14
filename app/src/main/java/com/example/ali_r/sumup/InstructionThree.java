@@ -1,6 +1,5 @@
 package com.example.ali_r.sumup;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -11,35 +10,53 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.TextView;
-
-import java.util.Random;
-
 
 /**
- * Created by Ali-R on 23/08/2015.
+ * Created by Ali-R on 29/08/2015.
  */
-public class InstructionsActivity extends AppCompatActivity {
+public class InstructionThree extends AppCompatActivity {
+    DatabaseHandler db = new DatabaseHandler(this);
 
     protected void onCreate(Bundle savedInstanceState) {
-
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.instructions_activity);
+        setContentView(R.layout.instruction_three);
 
-        final Button x =  (Button) findViewById(R.id.Next_Page);
-        buttonEffect(x);
-        x.setOnClickListener(new View.OnClickListener() {
+        final Button x3 =  (Button) findViewById(R.id.Next_Page2);
+        buttonEffect(x3);
+        x3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                startActivity(new Intent(InstructionsActivity.this, InstructionThree.class));
+
+                db.getWritableDatabase();
+                Contact newa5 = new Contact();
+                newa5 = db.getContact(2);
+
+                if(Integer.parseInt(newa5._phone_number) == 6) {
+                    startActivity(new Intent(InstructionThree.this, LevelSix.class));
+                    db.close();
+                }
+                else if(Integer.parseInt(newa5._phone_number) == 7) {
+                    startActivity(new Intent(InstructionThree.this, LevelSeven.class));
+                    db.close();
+                }
+
+                else if(Integer.parseInt(newa5._phone_number) == 8) {
+                    startActivity(new Intent(InstructionThree.this, LevelEight.class));
+                    db.close();
+                }
+                else if(Integer.parseInt(newa5._phone_number) == 9) {
+                    startActivity(new Intent(InstructionThree.this, LevelNine.class));
+                    db.close();
+                }
+                else{
+                    startActivity(new Intent(InstructionThree.this, MainActivity.class));
+                    db.close();
+                }
             }
         });
-
-
-
 
     }
     @Override
@@ -82,4 +99,5 @@ public class InstructionsActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }

@@ -148,7 +148,7 @@ public class LevelSix extends AppCompatActivity {
         final TextView asj = (TextView) findViewById(R.id.LevelTimer);
 
 
-        CountDownTimer countd = new CountDownTimer(400000, 500) {
+        CountDownTimer countd = new CountDownTimer(230000, 500) {
 
 
             boolean hello = true;

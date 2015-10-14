@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/instruction_three"
+    android:focusableInTouchMode="false"
+    android:background="@drawable/page_three"
+    android:gravity="bottom">
+
+    <Button
+        android:layout_width="46dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/Next_Page2"
+        android:layout_gravity="bottom|center_horizontal"
+
+        android:textColor="#ff002b"
+        android:textStyle="bold"
+        android:textSize="@dimen/activity_horizontal_margin"
+        android:background="@android:drawable/ic_media_ff"
+        android:backgroundTint="#010001"
+        android:elegantTextHeight="true"
+        android:clickable="true"
+        android:focusableInTouchMode="true"
+        android:focusable="true"
+        android:enabled="true"
+        android:singleLine="false"
+        android:layout_weight="0.0" />
+</LinearLayout>

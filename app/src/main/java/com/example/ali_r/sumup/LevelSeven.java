@@ -143,7 +143,7 @@ public class LevelSeven extends AppCompatActivity {
         final TextView asj = (TextView) findViewById(R.id.LevelSevenTimer);
 
 
-        CountDownTimer countd = new CountDownTimer(400000, 500) {
+        CountDownTimer countd = new CountDownTimer(250000, 500) {
 
 
             boolean hello = true;

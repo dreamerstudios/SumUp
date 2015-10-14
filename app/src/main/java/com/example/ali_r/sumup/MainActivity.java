@@ -158,7 +158,7 @@ public class MainActivity extends AppCompatActivity{
             final TextView asj = (TextView) findViewById(R.id.Timer);
 
 
-            CountDownTimer countd = new CountDownTimer(400000, 500) {
+            CountDownTimer countd = new CountDownTimer(220000, 500) {
 
 
                 boolean hello = true;

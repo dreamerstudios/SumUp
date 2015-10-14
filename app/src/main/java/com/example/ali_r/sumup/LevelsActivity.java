@@ -112,16 +112,12 @@ public class LevelsActivity extends AppCompatActivity {
             //buttonEffect(x1);
             seven.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-
                     startActivity(new Intent(LevelsActivity.this, LevelSeven.class));
                 }
             });
-
-
             //buttonEffect(x1);
             eight.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-
                     startActivity(new Intent(LevelsActivity.this, LevelEight.class));
                 }
             });
@@ -137,52 +133,33 @@ public class LevelsActivity extends AppCompatActivity {
                     startActivity(new Intent(LevelsActivity.this, MainActivity.class));
                 }
             });
-
             six.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-
                     startActivity(new Intent(LevelsActivity.this, LevelSix.class));
                 }
             });
-
             //buttonEffect(x1);
             seven.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-
                     startActivity(new Intent(LevelsActivity.this, LevelSeven.class));
                 }
             });
-
-
             //buttonEffect(x1);
             eight.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-
                     startActivity(new Intent(LevelsActivity.this, LevelEight.class));
                 }
             });
-
-
             //buttonEffect(x1);
             nine.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-
                     startActivity(new Intent(LevelsActivity.this, LevelNine.class));
                 }
             });
         }
-
         db.close();
         //buttonEffect(x1);
-
-
-
-
     }
-
-
-
-
 
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
